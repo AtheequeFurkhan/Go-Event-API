@@ -47,5 +47,13 @@ func main() {
 		err!= nil && err!= migrate.ErrNoChange{
 			log.Fatal(err)
 		}
+	case "down":
+		if err := mig.Down();
+		err!= nil && err!= migrate.ErrNoChange{
+			log.Fatal(err)
+		}
+	default:
+		log.Fatal("Invalid Direction")
 	}
+	
 }
