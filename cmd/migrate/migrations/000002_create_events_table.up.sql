@@ -5,5 +5,5 @@ CREATE TABLE IF NOT EXISTS events(
     description TEXT NOT NULL,
     date DATETIME NOT NULL,
     location TEXT NOT NULL,
-    Foreign Key (owner_id) REFERENCES users(id) ON DELETE CASCADE
+    Foreign Key (owner) REFERENCES users(id) ON DELETE CASCADE
 );

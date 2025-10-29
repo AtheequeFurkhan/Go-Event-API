@@ -1,1 +1,1 @@
-DROP USERS IF EXISTS events;
+DROP TABLE IF EXISTS events;

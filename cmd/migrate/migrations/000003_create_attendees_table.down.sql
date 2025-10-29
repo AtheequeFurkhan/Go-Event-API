@@ -1,1 +1,1 @@
-DROP USERS IF EXISTS attendees;
+DROP TABLE IF EXISTS attendees;
