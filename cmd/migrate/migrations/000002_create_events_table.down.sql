@@ -1,0 +1,1 @@
+DROP USERS IF EXISTS events;
