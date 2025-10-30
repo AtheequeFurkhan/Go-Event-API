@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type EventModel struct {
+type EventsModel struct {
 	DB *sql.DB
 }
 
