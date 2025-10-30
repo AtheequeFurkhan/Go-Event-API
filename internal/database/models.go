@@ -4,7 +4,7 @@ import "database/sql"
 
 type Models struct {
 	Users     UserModel
-	Events    EventModel
+	Events    EventsModel
 	Attendees AttendeeModel
 }
 
