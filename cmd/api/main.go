@@ -1,8 +1,11 @@
 package main
 
-import "database/sql"
+import (
+	"database/sql"
+	"log"
+)
 
-func main(
+func main() {
 	db, err := sql.Open("sqlite3",	"./data/db.sqlite3")
 
 	if err != nil {
@@ -12,4 +15,4 @@ func main(
 	defer db.Close()
 
 
-)
+}
