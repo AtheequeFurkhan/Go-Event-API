@@ -9,7 +9,7 @@ import (
 
 func (app *application) server() error {
 	server := &http.Server{
-		Addr:         fmt.Sprint(":%d", app.port),
+		Addr:         fmt.Sprintf(":%d", app.port),
 		Handler:      app.routes(),
 		IdleTimeout:  time.Minute,
 		ReadTimeout:  10 * time.Second,
