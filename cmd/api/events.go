@@ -49,20 +49,23 @@ func (app *application) getEvent(c *gin.Context) {
 }
 
 func (app *application) updateEvent(c *gin.Context) {
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
-		return
-	}
 
-	event, err := app.models.Events.Get(id)
-
-	if event == nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Event Not Found"})
-	}
+	exisitingEvent, err := app.models.Events.Get(id)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch the Event"})
 	}
 
-	c.JSON(http.StatusOK, event)
+	if exisitingEvent == nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Event Not Found"})
+	}
+
+	updatedEvent := &database.Events()
+
+	if err := c.ShouldBindJSON(updatedEvent); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, exisitingEvent)
 }
