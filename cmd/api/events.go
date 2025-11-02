@@ -67,5 +67,11 @@ func (app *application) updateEvent(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, exisitingEvent)
+	updatedEvent.Id = id
+
+	if err := app.models.Events.Update(updatedEvent); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch the Event"})
+
+	}
+	c.JSON(http.StatusOK, updatedEvent)
 }
