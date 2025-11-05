@@ -86,3 +86,19 @@ func (app *application) updateEvent(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, updatedEvent)
 }
+
+func (app *application) deleteEvent(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	{
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+		}
+	}
+
+	if err := app.models.Events.Delete(id); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch the Event"})
+
+	}
+	c.JSON(http.StatusNoContent, nil)
+
+}
