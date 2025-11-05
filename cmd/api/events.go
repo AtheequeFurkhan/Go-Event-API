@@ -27,6 +27,17 @@ func (app *application) createEvent(c *gin.Context) {
 
 }
 
+func (app *application) getAllEvents(c *gin.Context) {
+	events, err := app.models.Events.GetAll()
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID"})
+		return
+
+	}
+	c.JSON(http.StatusOK, events)
+}
+
 func (app *application) getEvent(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 
