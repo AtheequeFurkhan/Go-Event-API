@@ -17,3 +17,7 @@ type Events struct {
 	Date        time.Time `json:"date" binding:"required, datetime="2000-01-01"`
 	Location    string    `json:"location" binding:"required,min=3"`
 }
+
+func (m *EventsModel) insert(event *Events) error {
+
+}
