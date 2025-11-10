@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"time"
 )
@@ -18,6 +19,12 @@ type Events struct {
 	Location    string    `json:"location" binding:"required,min=3"`
 }
 
-func (m *EventsModel) insert(event *Events) error {
+func (m *EventsModel) Insert(event *Events) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := "INSERT INTO events (owner_id, name, description, date, location) VALUES ($1, $2, $3, $4, $5)"
+
+	return m.DB.QueryRowContext(ctx, query, event.OwnerId, event.Name, event.Description, event.Date, event.Location).Scan(&event.Id)
 
 }
