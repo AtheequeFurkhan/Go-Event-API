@@ -28,3 +28,7 @@ func (m *EventsModel) Insert(event *Events) error {
 	return m.DB.QueryRowContext(ctx, query, event.OwnerId, event.Name, event.Description, event.Date, event.Location).Scan(&event.Id)
 
 }
+
+func (m *EventsModel) getAll() ([]*Events, error) {
+
+}
