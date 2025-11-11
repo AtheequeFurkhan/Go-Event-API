@@ -30,5 +30,32 @@ func (m *EventsModel) Insert(event *Events) error {
 }
 
 func (m *EventsModel) getAll() ([]*Events, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
 
+	query := "SELECT * FROM events"
+
+	rows, err := m.DB.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	events := []*Events{}
+
+	for rows.Next() {
+		var event Events
+
+		err := rows.Scan(&event.Id, &event.OwnerId, &event.Name, &event.Description, &event.Date, &event.Date)
+		if err != nil {
+			return nil, err
+		}
+		events = append(events, &event)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return events, nil
 }
