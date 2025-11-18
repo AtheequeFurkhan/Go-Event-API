@@ -9,7 +9,6 @@ import (
 type EventsModel struct {
 	DB *sql.DB
 }
-
 type Events struct {
 	Id          int       `json:"id"`
 	OwnerId     string    `json:"ownerId" binding:"required"`
