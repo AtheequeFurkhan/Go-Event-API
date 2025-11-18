@@ -23,7 +23,6 @@ func (m *EventsModel) Insert(event *Events) error {
 	defer cancel()
 
 	query := "INSERT INTO events (owner_id, name, description, date, location) VALUES ($1, $2, $3, $4, $5)"
-
 	return m.DB.QueryRowContext(ctx, query, event.OwnerId, event.Name, event.Description, event.Date, event.Location).Scan(&event.Id)
 
 }
@@ -33,7 +32,6 @@ func (m *EventsModel) getAll() ([]*Events, error) {
 	defer cancel()
 
 	query := "SELECT * FROM events"
-
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
